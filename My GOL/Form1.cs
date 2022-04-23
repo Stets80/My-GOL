@@ -12,6 +12,7 @@ namespace My_GOL
 {
     public partial class Form1 : Form
     {
+        //stat
 
         // The universe array
         bool[,] universe = new bool[10, 10];
