@@ -46,7 +46,6 @@ namespace My_GOL
             this.OK.TabIndex = 0;
             this.OK.Text = "OK";
             this.OK.UseVisualStyleBackColor = true;
-            this.OK.Click += new System.EventHandler(this.OK_Click);
             // 
             // Cancel
             // 
@@ -92,7 +91,7 @@ namespace My_GOL
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Seed";
+            this.label1.Text = "seed";
             // 
             // SeedDialog
             // 
@@ -111,7 +110,7 @@ namespace My_GOL
             this.MinimizeBox = false;
             this.Name = "SeedDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Seed Dialog";
+            this.Text = "seed Dialog";
             ((System.ComponentModel.ISupportInitialize)(this.seedUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

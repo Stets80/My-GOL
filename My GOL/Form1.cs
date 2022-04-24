@@ -23,7 +23,7 @@ namespace My_GOL
 
         // Drawing colors
         Color gridColor = Color.Black;
-        Color cellColor = Color.Gray;
+        Color cellColor = Properties.Settings.Default.livingcell;
 
         // The Timer class
         Timer timer = new Timer();
@@ -32,7 +32,7 @@ namespace My_GOL
         int generations = 0;
 
         // seed for randimzer
-        int Seed = 0;
+        int seed = 0;
         public Form1()
         {
             InitializeComponent();
@@ -369,19 +369,17 @@ namespace My_GOL
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SeedDialog dlg = new SeedDialog();
+            dlg.setseed(seed);
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                // You only want to retrieve information
-                // from the dialog if it was closed with
-                // the OK button.
-                Seed = dlg.MyInteger;
-                randomizer(Seed);
+                seed = dlg.getseed();
+                randomizer(seed);
             }
         }
         private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            randomizer(Seed);
+            randomizer(seed);
         }
         private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -397,8 +395,8 @@ namespace My_GOL
             {
                 for (int j = 0; j < universe.GetLength(1); j++)
                 {
-                    num = (seeder.Next(1, 10));
-                    if (num > 5)
+                    num = (seeder.Next(0, 2));
+                    if (num == 0)
                     {
                         universe[i, j] = true;
                     }
@@ -413,16 +411,16 @@ namespace My_GOL
         }
         public void timeRandomizer()
         {
-            Seed = (int)DateTime.Now.Ticks;
-            Random seeder = new Random(Seed);
+            seed = (int)DateTime.Now.Ticks;
+            Random seeder = new Random(seed);
             int num = 0;
 
             for (int i = 0; i < universe.GetLength(0); i++)
             {
                 for (int j = 0; j < universe.GetLength(1); j++)
                 {
-                    num = (seeder.Next(1, 10));
-                    if (num > 5)
+                    num = seeder.Next(0, 2);
+                    if (num == 0)
                     {
                         universe[i, j] = true;
                     }
@@ -448,14 +446,38 @@ namespace My_GOL
                     }
                 }
             }
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString() + " Seed = " + Seed.ToString() + " Cell Count = " + alive.ToString();
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString() + " seed = " + seed.ToString() + " Cell Count = " + alive.ToString();
             graphicsPanel1.Invalidate();
         }
 
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Colorbox dlg = new Colorbox();
-            dlg.ShowDialog();
+            
+
+        }
+
+        private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog livingcell = new ColorDialog();
+            livingcell.Color = cellColor;
+            if (DialogResult.OK == livingcell.ShowDialog())
+            {
+                cellColor = livingcell.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.livingcell = cellColor;
+            Properties.Settings.Default.Save();
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            cellColor = Properties.Settings.Default.livingcell;
+            graphicsPanel1.Invalidate();
         }
     }
 }

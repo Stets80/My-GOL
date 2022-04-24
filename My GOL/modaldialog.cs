@@ -12,24 +12,19 @@ namespace My_GOL
 {
     public partial class SeedDialog : Form
     {
-        public event ApplyEventHandler Apply;
 
         public SeedDialog()
         {
             InitializeComponent();
         }
 
-        public int MyInteger { get; set; }
-        public string MyString { get; set; }
-
-        private void OK_Click(object sender, EventArgs e)
+        public int getseed()
         {
-            // Publish the event if it is not null
-            // and pass the information with the custom
-            // event arguements class.
-            if (Apply != null) Apply(this, new ApplyEventArgs(this.MyInteger, this.MyString));
-            MyInteger = (int)seedUpDown.Value;
-           
+            return (int)seedUpDown.Value;
+        }
+        public void setseed(int seed)
+        {
+            seedUpDown.Value = seed;
         }
 
         private void Randomizer_Click(object sender, EventArgs e)
