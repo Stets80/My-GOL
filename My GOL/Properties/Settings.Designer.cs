@@ -34,5 +34,29 @@ namespace My_GOL.Properties {
                 this["livingcell"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color newgridcolor {
+            get {
+                return ((global::System.Drawing.Color)(this["newgridcolor"]));
+            }
+            set {
+                this["newgridcolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color deadcell {
+            get {
+                return ((global::System.Drawing.Color)(this["deadcell"]));
+            }
+            set {
+                this["deadcell"] = value;
+            }
+        }
     }
 }

@@ -17,7 +17,6 @@ namespace My_GOL
         {
             InitializeComponent();
         }
-
         public int getseed()
         {
             return (int)seedUpDown.Value;
@@ -26,7 +25,6 @@ namespace My_GOL
         {
             seedUpDown.Value = seed;
         }
-
         private void Randomizer_Click(object sender, EventArgs e)
         {
             Random seeder = new Random((int)DateTime.Now.Ticks);

@@ -5,5 +5,11 @@
     <Setting Name="livingcell" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">DarkGray</Value>
     </Setting>
+    <Setting Name="newgridcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="deadcell" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
