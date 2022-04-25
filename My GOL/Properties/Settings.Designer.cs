@@ -38,12 +38,12 @@ namespace My_GOL.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color newgridcolor {
+        public global::System.Drawing.Color gridlinecolor {
             get {
-                return ((global::System.Drawing.Color)(this["newgridcolor"]));
+                return ((global::System.Drawing.Color)(this["gridlinecolor"]));
             }
             set {
-                this["newgridcolor"] = value;
+                this["gridlinecolor"] = value;
             }
         }
         
@@ -56,6 +56,54 @@ namespace My_GOL.Properties {
             }
             set {
                 this["deadcell"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UniverseType {
+            get {
+                return ((bool)(this["UniverseType"]));
+            }
+            set {
+                this["UniverseType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GridToggle {
+            get {
+                return ((bool)(this["GridToggle"]));
+            }
+            set {
+                this["GridToggle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NeighborCountToggle {
+            get {
+                return ((bool)(this["NeighborCountToggle"]));
+            }
+            set {
+                this["NeighborCountToggle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HudToggle {
+            get {
+                return ((bool)(this["HudToggle"]));
+            }
+            set {
+                this["HudToggle"] = value;
             }
         }
     }

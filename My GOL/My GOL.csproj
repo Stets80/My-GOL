@@ -55,19 +55,19 @@
     <Compile Include="GraphicsPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="modaldialog.cs">
+    <Compile Include="Seeddialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modaldialog.Designer.cs">
-      <DependentUpon>modaldialog.cs</DependentUpon>
+    <Compile Include="Seeddialog.Designer.cs">
+      <DependentUpon>Seeddialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modaldialog.resx">
-      <DependentUpon>modaldialog.cs</DependentUpon>
+    <EmbeddedResource Include="Seeddialog.resx">
+      <DependentUpon>Seeddialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

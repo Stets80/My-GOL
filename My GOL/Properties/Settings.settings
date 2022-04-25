@@ -5,11 +5,23 @@
     <Setting Name="livingcell" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">DarkGray</Value>
     </Setting>
-    <Setting Name="newgridcolor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="gridlinecolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="deadcell" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="UniverseType" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GridToggle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NeighborCountToggle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HudToggle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

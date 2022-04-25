@@ -13,16 +13,17 @@ namespace My_GOL
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[10, 10];
-        int[,] numuniverse = new int[10, 10];
+        bool[,] universe = new bool[20, 20];
+        int[,] numuniverse = new int[20, 20];
 
         //universe defaults to torodial universetype true/false = torodial/finite
-        bool universetype = true;
-        bool gridtoggle = true;
-        bool neighborcounttoggle = true;
+        bool universetype = Properties.Settings.Default.UniverseType;
+        bool gridtoggle = Properties.Settings.Default.GridToggle;
+        bool neighborcounttoggle = Properties.Settings.Default.NeighborCountToggle;
+        bool hudtoggle = Properties.Settings.Default.HudToggle;
 
         // Drawing colors
-        Color gridColor = Properties.Settings.Default.newgridcolor;
+        Color gridColor = Properties.Settings.Default.gridlinecolor;
         Color cellColor = Properties.Settings.Default.livingcell;
         Color deadcellcolor = Properties.Settings.Default.deadcell;
 
@@ -30,6 +31,7 @@ namespace My_GOL
         Timer timer = new Timer();
 
         // Generation count
+        int alive = 0;
         int generations = 0;
 
         // seed for randimzer
@@ -39,9 +41,11 @@ namespace My_GOL
             InitializeComponent();
 
             // Setup the timer
-            timer.Interval = 50; // milliseconds
+            timer.Interval = 70; // milliseconds
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer running
+
+            menuchecker();
 
             statUpdate();
         }
@@ -115,6 +119,10 @@ namespace My_GOL
             // A brush for filling dead cells
             Brush deadcellBrush = new SolidBrush(deadcellcolor);
 
+            // a brush and color for the hud
+            Color hudcolor = Color.FromArgb(50, 255, 0, 0);
+            Brush hudbrush = new SolidBrush(hudcolor);
+
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -141,11 +149,13 @@ namespace My_GOL
                     }
 
                     // paint numbers in cells
-                    Font font = new Font("Arial", 20f);
+                    Font font = new Font("Arial", 10f);
 
                     StringFormat stringFormat = new StringFormat();
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Center;
+
+
 
                     Rectangle rect = new Rectangle(cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                     int neighbors = 0;
@@ -176,13 +186,27 @@ namespace My_GOL
                     if (gridtoggle == true)
                     {
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
-                    }
+                    }  
                 }
+                //hud
+                if (hudtoggle == true)
+                {
+                    StringFormat hudstringFormat = new StringFormat();
+                    hudstringFormat.Alignment = StringAlignment.Near;
+                    hudstringFormat.LineAlignment = StringAlignment.Far;
+                    Rectangle hudrect = new Rectangle(universe.GetLength(0), universe.GetLength(1), graphicsPanel1.ClientSize.Width, graphicsPanel1.ClientSize.Height - 40);
+                    Font font1 = new Font("Arial", 10f);
+                    
+                    e.Graphics.DrawString("Generations = " + generations.ToString() + "\nseed = " + seed.ToString() + "\nCell Count = " + alive.ToString(), font1, hudbrush, hudrect, hudstringFormat);
+                    
+                }
+
             }
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
             deadcellBrush.Dispose();
+            hudbrush.Dispose();
         }
         private int CountNeighborsToroidal(int x, int y)
         {
@@ -337,6 +361,21 @@ namespace My_GOL
         {
             NextGeneration();
         }
+        private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hudtoggle == true)
+            {
+                hudtoggle = false;
+                hUDToolStripMenuItem.Checked = false;
+                graphicsPanel1.Invalidate();
+            }
+            else if (hudtoggle == false)
+            {
+                hudtoggle = true;
+                hUDToolStripMenuItem.Checked = true;
+                graphicsPanel1.Invalidate();
+            }
+        }
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (neighborcounttoggle == true)
@@ -485,7 +524,7 @@ namespace My_GOL
         }
         public void statUpdate()
         {
-            int alive = 0;
+            alive = 0;
             for (int i = 0; i < universe.GetLength(0); i++)
             {
                 for (int j = 0; j < universe.GetLength(1); j++)
@@ -496,7 +535,9 @@ namespace My_GOL
                     }
                 }
             }
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString() + " seed = " + seed.ToString() + " Cell Count = " + alive.ToString();
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelseed.Text = "seed = " + seed.ToString();
+            toolStripStatusLabelcellcount.Text = "Cell Count = " + alive.ToString();
             graphicsPanel1.Invalidate();
         }
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -529,22 +570,65 @@ namespace My_GOL
                 graphicsPanel1.Invalidate();
             }
         }
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void menuchecker()
+        {
+            if(universetype == true)
+            {
+                toroidalToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                finiteToolStripMenuItem.Checked = true;
+            }
+            if(gridtoggle == true)
+            {
+                gridToolStripMenuItem.Checked = true;
+            }
+            if (neighborcounttoggle == true)
+            {
+                neighborCountToolStripMenuItem.Checked = true;
+            }
+            if (hudtoggle == true)
+            {
+                hUDToolStripMenuItem.Checked = true;
+            }
+        }
+
+private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.livingcell = cellColor;
-            Properties.Settings.Default.newgridcolor = gridColor;
+            Properties.Settings.Default.gridlinecolor = gridColor;
             Properties.Settings.Default.deadcell = deadcellcolor;
+            Properties.Settings.Default.UniverseType = universetype;
+            Properties.Settings.Default.GridToggle = gridtoggle;
+            Properties.Settings.Default.NeighborCountToggle = neighborcounttoggle;
+            Properties.Settings.Default.HudToggle = hudtoggle;
             Properties.Settings.Default.Save();
         }
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reset();
             cellColor = Properties.Settings.Default.livingcell;
-            gridColor = Properties.Settings.Default.newgridcolor;
+            gridColor = Properties.Settings.Default.gridlinecolor;
             deadcellcolor = Properties.Settings.Default.deadcell;
+            universetype = Properties.Settings.Default.UniverseType;
+            gridtoggle = Properties.Settings.Default.GridToggle;
+            neighborcounttoggle = Properties.Settings.Default.NeighborCountToggle;
+            hudtoggle = Properties.Settings.Default.HudToggle;
             graphicsPanel1.Invalidate();
         }
 
-
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reload();
+            cellColor = Properties.Settings.Default.livingcell;
+            gridColor = Properties.Settings.Default.gridlinecolor;
+            deadcellcolor = Properties.Settings.Default.deadcell;
+            universetype = Properties.Settings.Default.UniverseType;
+            gridtoggle = Properties.Settings.Default.GridToggle;
+            neighborcounttoggle = Properties.Settings.Default.NeighborCountToggle;
+            hudtoggle = Properties.Settings.Default.HudToggle;
+            graphicsPanel1.Invalidate();
+        }
     }
 }
