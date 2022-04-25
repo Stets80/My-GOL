@@ -12,7 +12,7 @@ namespace My_GOL
 {
     public partial class SeedDialog : Form
     {
-
+        
         public SeedDialog()
         {
             InitializeComponent();

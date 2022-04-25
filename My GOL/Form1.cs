@@ -41,7 +41,7 @@ namespace My_GOL
             InitializeComponent();
 
             // Setup the timer
-            timer.Interval = 70; // milliseconds
+            timer.Interval = 1; // milliseconds
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer running
 
@@ -120,7 +120,7 @@ namespace My_GOL
             Brush deadcellBrush = new SolidBrush(deadcellcolor);
 
             // a brush and color for the hud
-            Color hudcolor = Color.FromArgb(50, 255, 0, 0);
+            Color hudcolor = Color.FromArgb(20, 255, 0, 0);
             Brush hudbrush = new SolidBrush(hudcolor);
 
             // Iterate through the universe in the y, top to bottom
@@ -186,7 +186,7 @@ namespace My_GOL
                     if (gridtoggle == true)
                     {
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
-                    }  
+                    }
                 }
                 //hud
                 if (hudtoggle == true)
@@ -195,10 +195,10 @@ namespace My_GOL
                     hudstringFormat.Alignment = StringAlignment.Near;
                     hudstringFormat.LineAlignment = StringAlignment.Far;
                     Rectangle hudrect = new Rectangle(universe.GetLength(0), universe.GetLength(1), graphicsPanel1.ClientSize.Width, graphicsPanel1.ClientSize.Height - 40);
-                    Font font1 = new Font("Arial", 10f);
-                    
+                    Font font1 = new Font("Arial", 20f);
+
                     e.Graphics.DrawString("Generations = " + generations.ToString() + "\nseed = " + seed.ToString() + "\nCell Count = " + alive.ToString(), font1, hudbrush, hudrect, hudstringFormat);
-                    
+
                 }
 
             }
@@ -410,14 +410,18 @@ namespace My_GOL
         {
             universetype = true;
             toroidalToolStripMenuItem.Checked = true;
+            toroidalToolStripMenuItem1.Checked = true;
             finiteToolStripMenuItem.Checked = false;
+            finiteToolStripMenuItem1.Checked = false;
             graphicsPanel1.Invalidate();
         }
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             universetype = false;
             finiteToolStripMenuItem.Checked = true;
+            finiteToolStripMenuItem1.Checked = true;
             toroidalToolStripMenuItem.Checked = false;
+            toroidalToolStripMenuItem1.Checked = false;
             graphicsPanel1.Invalidate();
         }
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -572,29 +576,34 @@ namespace My_GOL
         }
         private void menuchecker()
         {
-            if(universetype == true)
+            if (universetype == true)
             {
                 toroidalToolStripMenuItem.Checked = true;
+                toroidalToolStripMenuItem1.Checked = true;
             }
-            else
+            else if (universetype == false)
             {
                 finiteToolStripMenuItem.Checked = true;
+                finiteToolStripMenuItem1.Checked = true;
             }
-            if(gridtoggle == true)
+            if (gridtoggle == true)
             {
                 gridToolStripMenuItem.Checked = true;
+                gridToolStripMenuItem1.Checked = true;
+
             }
             if (neighborcounttoggle == true)
             {
                 neighborCountToolStripMenuItem.Checked = true;
+                neighborCountToolStripMenuItem1.Checked = true;
             }
             if (hudtoggle == true)
             {
                 hUDToolStripMenuItem.Checked = true;
+                hUDToolStripMenuItem1.Checked = true;
             }
         }
-
-private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.livingcell = cellColor;
             Properties.Settings.Default.gridlinecolor = gridColor;
@@ -617,7 +626,6 @@ private void Form1_FormClosed(object sender, FormClosedEventArgs e)
             hudtoggle = Properties.Settings.Default.HudToggle;
             graphicsPanel1.Invalidate();
         }
-
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reload();
