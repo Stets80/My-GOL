@@ -652,7 +652,8 @@ namespace My_GOL
                 // Prefix all comment strings with an exclamation point.
                 // Use WriteLine to write the strings to the file. 
                 // It appends a CRLF for you.
-                writer.WriteLine("!This is my comment.");
+                writer.WriteLine("!" + DateTime.Now.ToString() + " date when file was saved.");
+                
 
                 // Iterate through the universe one row at a time.
                 for (int y = 0; y < universe.GetLength(1); y++)
@@ -665,12 +666,20 @@ namespace My_GOL
                     {
                         // If the universe[x,y] is alive then append 'O' (capital O)
                         // to the row string.
-
+                        if (universe[x,y] == true)
+                        {
+                            currentRow += 'O';
+                        }
                         // Else if the universe[x,y] is dead then append '.' (period)
                         // to the row string.
+                        else if (universe[x,y] == false)
+                        {
+                            currentRow += '.';
+                        }
                     }
                     // Once the current row has been read through and the 
                     // string constructed then write it to the file using WriteLine.
+                    writer.WriteLine(currentRow);
                 }
                 // After all rows and columns have been written then close the file.
                 writer.Close();
