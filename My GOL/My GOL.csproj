@@ -55,6 +55,12 @@
     <Compile Include="GraphicsPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="options.Designer.cs">
+      <DependentUpon>options.cs</DependentUpon>
+    </Compile>
     <Compile Include="Seeddialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="options.resx">
+      <DependentUpon>options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Seeddialog.resx">
       <DependentUpon>Seeddialog.cs</DependentUpon>

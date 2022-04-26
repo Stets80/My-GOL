@@ -33,3 +33,4 @@ C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my 
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.csproj.CoreCompileInputs.cache
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.exe
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.pdb
+C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My_GOL.options.resources

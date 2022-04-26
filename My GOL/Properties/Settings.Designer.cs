@@ -106,5 +106,41 @@ namespace My_GOL.Properties {
                 this["HudToggle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int Interval {
+            get {
+                return ((int)(this["Interval"]));
+            }
+            set {
+                this["Interval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int Rows {
+            get {
+                return ((int)(this["Rows"]));
+            }
+            set {
+                this["Rows"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int Coloumns {
+            get {
+                return ((int)(this["Coloumns"]));
+            }
+            set {
+                this["Coloumns"] = value;
+            }
+        }
     }
 }
