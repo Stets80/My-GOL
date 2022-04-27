@@ -68,7 +68,7 @@ namespace My_GOL
                     }
                     else
                     {
-                        CountNeighborsFinite(i, j);
+                        numuniverse[i, j] = CountNeighborsFinite(i, j);
                     }
                 }
             }
@@ -199,7 +199,6 @@ namespace My_GOL
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                     }
                 }
-                
             }
             //hud
             if (hudtoggle == true)
@@ -208,7 +207,7 @@ namespace My_GOL
                 hudstringFormat.Alignment = StringAlignment.Near;
                 hudstringFormat.LineAlignment = StringAlignment.Far;
                 RectangleF hudrect = new RectangleF(universe.GetLength(0), universe.GetLength(1), graphicsPanel1.ClientSize.Width, graphicsPanel1.ClientSize.Height - 40);
-                Font hudfont = new Font("Arial", 25f);
+                Font hudfont = new Font("Arial", 15f);
 
                 e.Graphics.DrawString("Generations = " + generations.ToString() + "\nseed = " + seed.ToString() + "\nCell Count = " + alive.ToString() + "\nInterval = " + time.ToString(), hudfont, hudbrush, hudrect, hudstringFormat);
             }
@@ -337,7 +336,7 @@ namespace My_GOL
             startToolStripMenuItem.Enabled = false;
             pauseToolStripMenuItem.Enabled = true;
             PlaytoolStripButton.Enabled = false;
-            PasuetoolStripButton.Enabled = true;
+            pausetoolStripButton.Enabled = true;
         }
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -345,7 +344,7 @@ namespace My_GOL
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
             PlaytoolStripButton.Enabled = true;
-            PasuetoolStripButton.Enabled = false;
+            pausetoolStripButton.Enabled = false;
         }
         private void nextToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -355,7 +354,7 @@ namespace My_GOL
         {
             timer.Enabled = true;
             PlaytoolStripButton.Enabled = false;
-            PasuetoolStripButton.Enabled = true;
+            pausetoolStripButton.Enabled = true;
             startToolStripMenuItem.Enabled = false;
             pauseToolStripMenuItem.Enabled = true;
         }
@@ -363,7 +362,7 @@ namespace My_GOL
         {
             timer.Enabled = false;
             PlaytoolStripButton.Enabled = true;
-            PasuetoolStripButton.Enabled = false;
+            pausetoolStripButton.Enabled = false;
             startToolStripMenuItem.Enabled = true;
             pauseToolStripMenuItem.Enabled = false;
         }
@@ -440,7 +439,7 @@ namespace My_GOL
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
             PlaytoolStripButton.Enabled = true;
-            PasuetoolStripButton.Enabled = false;
+            pausetoolStripButton.Enabled = false;
             for (int i = 0; i < universe.GetLength(0); i++)
             {
                 for (int j = 0; j < universe.GetLength(1); j++)
@@ -458,7 +457,7 @@ namespace My_GOL
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
             PlaytoolStripButton.Enabled = true;
-            PasuetoolStripButton.Enabled = false;
+            pausetoolStripButton.Enabled = false;
             for (int i = 0; i < universe.GetLength(0); i++)
             {
                 for (int j = 0; j < universe.GetLength(1); j++)
@@ -501,7 +500,7 @@ namespace My_GOL
                 pauseToolStripMenuItem.Enabled = false;
                 startToolStripMenuItem.Enabled = true;
                 PlaytoolStripButton.Enabled = true;
-                PasuetoolStripButton.Enabled = false;
+                pausetoolStripButton.Enabled = false;
                 generations = 0;
                 statUpdate();
             }
@@ -728,10 +727,19 @@ namespace My_GOL
                 }
                 // Resize the current universe and scratchPad
                 // to the width and height of the file calculated above.
-                universe = new bool[maxWidth, maxHeight];
-                scratchPad = new bool[maxWidth, maxHeight];
-                numuniverse = new int[maxWidth, maxHeight];
-                graphicsPanel1.Invalidate();
+                timer.Enabled = false;
+                pauseToolStripMenuItem.Enabled = false;
+                startToolStripMenuItem.Enabled = true;
+                PlaytoolStripButton.Enabled = true;
+                pausetoolStripButton.Enabled = false;
+                generations = 0;
+                row = maxWidth;
+                coloumn = maxHeight;
+                universe = new bool[row, coloumn];
+                scratchPad = new bool[row, coloumn];
+                numuniverse = new int[row, coloumn];
+                statUpdate();
+
 
                 // Reset the file pointer back to the beginning of the file.
                 reader.BaseStream.Seek(0, SeekOrigin.Begin);
@@ -754,7 +762,6 @@ namespace My_GOL
                     {
                         for (int xPos = 0; xPos < row.Length; xPos++)
                         {
-
                             // If row[xPos] is a 'O' (capital O) then
                             // set the corresponding cell in the universe to alive.
                             if (row[xPos] == 'O')
@@ -813,15 +820,15 @@ namespace My_GOL
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
             PlaytoolStripButton.Enabled = true;
-            PasuetoolStripButton.Enabled = false;
+            pausetoolStripButton.Enabled = false;
             generations = 0;
             statUpdate();
             graphicsPanel1.Invalidate();
         }
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            statUpdate();
             Properties.Settings.Default.Reload();
-            Properties.Settings.Default.Reset();
             cellColor = Properties.Settings.Default.livingcell;
             gridColor = Properties.Settings.Default.gridlinecolor;
             deadcellcolor = Properties.Settings.Default.deadcell;
@@ -832,6 +839,16 @@ namespace My_GOL
             time = Properties.Settings.Default.Interval;
             row = Properties.Settings.Default.Rows;
             coloumn = Properties.Settings.Default.Coloumns;
+            universe = new bool[row, coloumn];
+            scratchPad = new bool[row, coloumn];
+            numuniverse = new int[row, coloumn];
+            timer.Enabled = false;
+            pauseToolStripMenuItem.Enabled = false;
+            startToolStripMenuItem.Enabled = true;
+            PlaytoolStripButton.Enabled = true;
+            pausetoolStripButton.Enabled = false;
+            generations = 0;
+            statUpdate();
             graphicsPanel1.Invalidate();
         }
     }
