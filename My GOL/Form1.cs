@@ -13,12 +13,12 @@ namespace My_GOL
 {
     public partial class Form1 : Form
     {
-        // The universe array
+        // The universes array
         bool[,] universe = new bool[Properties.Settings.Default.Rows, Properties.Settings.Default.Coloumns];
         bool[,] scratchPad = new bool[Properties.Settings.Default.Rows, Properties.Settings.Default.Coloumns];
         int[,] numuniverse = new int[Properties.Settings.Default.Rows, Properties.Settings.Default.Coloumns];
 
-        //universe defaults to torodial universetype true/false = torodial/finite
+        //setting toggles for HUD, Grid Neighbor count, universetype true/false = torodial/finite
         bool universetype = Properties.Settings.Default.UniverseType;
         bool gridtoggle = Properties.Settings.Default.GridToggle;
         bool neighborcounttoggle = Properties.Settings.Default.NeighborCountToggle;
@@ -32,12 +32,14 @@ namespace My_GOL
         // The Timer class
         Timer timer = new Timer();
 
-        // Generation count
+        // Generation count and cell count
         int alive = 0;
         int generations = 0;
 
-        // seed for randimzer
+        // seed for randomizer
         int seed = 0;
+
+        //settings for interval, and X,Y coordinates for universes
         int time = Properties.Settings.Default.Interval;
         int row = Properties.Settings.Default.Rows;
         int coloumn = Properties.Settings.Default.Coloumns;
@@ -50,8 +52,9 @@ namespace My_GOL
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer running
 
+            // set checked status for veiw options 
             menuchecker();
-
+            //update tool status bar and graphics
             statUpdate();
         }
         private void NextGeneration()
@@ -112,7 +115,7 @@ namespace My_GOL
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // The event called by the timer every Interval milliseconds.
+            // The event called by the timer every Interval in milliseconds.
             NextGeneration();
         }
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
@@ -129,7 +132,7 @@ namespace My_GOL
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
 
-            // A brush for filling dead cells
+            // A brush for filling dead cells/background color
             Brush deadcellBrush = new SolidBrush(deadcellcolor);
 
             // a brush and color for the hud
@@ -169,6 +172,8 @@ namespace My_GOL
                     stringFormat.LineAlignment = StringAlignment.Center;
 
                     RectangleF rect = new RectangleF(cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+
+                    //Calculate the count of neighbors based off the kind of universe 
                     int neighbors = 0;
                     if (universetype == true)
                     {
@@ -327,10 +332,12 @@ namespace My_GOL
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //close the program
             this.Close();
         }
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //start the timer and toggle checked for start/pause
             timer.Enabled = true;
             startToolStripMenuItem.Enabled = false;
             pauseToolStripMenuItem.Enabled = true;
@@ -339,6 +346,7 @@ namespace My_GOL
         }
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //stop the timer and toggle checked for start/pause
             timer.Enabled = false;
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
@@ -347,10 +355,12 @@ namespace My_GOL
         }
         private void nextToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //set generation forward one
             NextGeneration();
         }
         private void PlaytoolStripButton_Click(object sender, EventArgs e)
         {
+            //start the timer and toggle checked for start/pause
             timer.Enabled = true;
             PlaytoolStripButton.Enabled = false;
             pausetoolStripButton.Enabled = true;
@@ -359,6 +369,7 @@ namespace My_GOL
         }
         private void PasuetoolStripButton_Click(object sender, EventArgs e)
         {
+            //stop the timer and toggle checked for start/pause
             timer.Enabled = false;
             PlaytoolStripButton.Enabled = true;
             pausetoolStripButton.Enabled = false;
@@ -367,10 +378,12 @@ namespace My_GOL
         }
         private void NexttoolStripButton_Click(object sender, EventArgs e)
         {
+            //set generation forward one
             NextGeneration();
         }
         private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //toggle the hud to be drawn and set checked status
             if (hudtoggle == true)
             {
                 hudtoggle = false;
@@ -386,6 +399,7 @@ namespace My_GOL
         }
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //toggle neighbor count to be drawn and set checked status
             if (neighborcounttoggle == true)
             {
                 neighborcounttoggle = false;
@@ -401,6 +415,7 @@ namespace My_GOL
         }
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //grid toggle to be drawn and set checked status
             if (gridtoggle == true)
             {
                 gridtoggle = false;
@@ -416,6 +431,7 @@ namespace My_GOL
         }
         private void toroidalToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //switches universe type and set checked status
             universetype = true;
             toroidalToolStripMenuItem.Checked = true;
             toroidalToolStripMenuItem1.Checked = true;
@@ -425,6 +441,7 @@ namespace My_GOL
         }
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //switches universe type and set checked status
             universetype = false;
             finiteToolStripMenuItem.Checked = true;
             finiteToolStripMenuItem1.Checked = true;
@@ -434,6 +451,7 @@ namespace My_GOL
         }
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //clears the universe and stops the timer and rests the status strip
             timer.Enabled = false;
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
@@ -452,6 +470,7 @@ namespace My_GOL
         }
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
+            //clears the universe and stops the timer and rests the status strip
             timer.Enabled = false;
             pauseToolStripMenuItem.Enabled = false;
             startToolStripMenuItem.Enabled = true;
@@ -470,9 +489,11 @@ namespace My_GOL
         }
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //open the seed dialog box 
             SeedDialog dlg = new SeedDialog();
             dlg.setseed(seed);
 
+            //if OK is pressed get seed and use it to randomize
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 seed = dlg.getseed();
@@ -481,6 +502,7 @@ namespace My_GOL
         }
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //opens options dialog  makes a new universe and stops the timer
             options dlg = new options();
             dlg.settime(time);
             dlg.setwidth(row);
@@ -506,15 +528,17 @@ namespace My_GOL
         }
         private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //uses a seed to randomize the universe
             randomizer(seed);
         }
         private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //uses time to randomize the universe
             timeRandomizer();
         }
         public void randomizer(int Seed)
         {
-            //randomizer
+            //randomizes the universe based on a seed
             Random seeder = new Random(Seed);
             int num = 0;
 
@@ -538,6 +562,7 @@ namespace My_GOL
         }
         public void timeRandomizer()
         {
+            //randomizes the universe base on time
             seed = (int)DateTime.Now.Ticks;
             Random seeder = new Random(seed);
             int num = 0;
@@ -561,6 +586,7 @@ namespace My_GOL
         }
         public void statUpdate()
         {
+            //updates the status strip 
             alive = 0;
             for (int i = 0; i < universe.GetLength(0); i++)
             {
@@ -581,6 +607,7 @@ namespace My_GOL
         }
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //uses a color dialog box to change the back ground color 
             ColorDialog deadcell = new ColorDialog();
             deadcell.Color = deadcellcolor;
             if (DialogResult.OK == deadcell.ShowDialog())
@@ -591,6 +618,7 @@ namespace My_GOL
         }
         private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //uses a color dialog box to change the live cell colors
             ColorDialog livingcell = new ColorDialog();
             livingcell.Color = cellColor;
             if (DialogResult.OK == livingcell.ShowDialog())
@@ -601,6 +629,7 @@ namespace My_GOL
         }
         private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //uses a color dialog box to change the grid color
             ColorDialog newgridcolor = new ColorDialog();
             newgridcolor.Color = gridColor;
             if (DialogResult.OK == newgridcolor.ShowDialog())
@@ -611,6 +640,7 @@ namespace My_GOL
         }
         private void menuchecker()
         {
+            //addes a check box next that view option
             if (universetype == true)
             {
                 toroidalToolStripMenuItem.Checked = true;
@@ -786,6 +816,7 @@ namespace My_GOL
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //saves the settings of the progam when closed
             Properties.Settings.Default.livingcell = cellColor;
             Properties.Settings.Default.gridlinecolor = gridColor;
             Properties.Settings.Default.deadcell = deadcellcolor;
@@ -800,6 +831,7 @@ namespace My_GOL
         }
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //resets all setting to default
             statUpdate();
             Properties.Settings.Default.Reset();
             cellColor = Properties.Settings.Default.livingcell;
@@ -826,6 +858,7 @@ namespace My_GOL
         }
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //load the last saved settings
             statUpdate();
             Properties.Settings.Default.Reload();
             cellColor = Properties.Settings.Default.livingcell;

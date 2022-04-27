@@ -91,16 +91,36 @@ namespace My_GOL
             // widthnumericUpDown
             // 
             this.widthnumericUpDown.Location = new System.Drawing.Point(224, 78);
+            this.widthnumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.widthnumericUpDown.Name = "widthnumericUpDown";
             this.widthnumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.widthnumericUpDown.TabIndex = 4;
+            this.widthnumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // heightnumericUpDown
             // 
             this.heightnumericUpDown.Location = new System.Drawing.Point(224, 104);
+            this.heightnumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.heightnumericUpDown.Name = "heightnumericUpDown";
             this.heightnumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.heightnumericUpDown.TabIndex = 5;
+            this.heightnumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // width
             // 
