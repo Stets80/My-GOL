@@ -134,7 +134,7 @@ namespace My_GOL
             Brush deadcellBrush = new SolidBrush(deadcellcolor);
 
             // a brush and color for the hud
-            Color hudcolor = Color.FromArgb(70, 255, 0, 0);
+            Color hudcolor = Color.FromArgb(130, 255, 0, 0);
             Brush hudbrush = new SolidBrush(hudcolor);
 
             // Iterate through the universe in the y, top to bottom
@@ -199,17 +199,18 @@ namespace My_GOL
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                     }
                 }
-                //hud
-                if (hudtoggle == true)
-                {
-                    StringFormat hudstringFormat = new StringFormat();
-                    hudstringFormat.Alignment = StringAlignment.Near;
-                    hudstringFormat.LineAlignment = StringAlignment.Far;
-                    RectangleF hudrect = new RectangleF(universe.GetLength(0), universe.GetLength(1), graphicsPanel1.ClientSize.Width, graphicsPanel1.ClientSize.Height - 40);
-                    Font hudfont = new Font("Arial", 10f);
+                
+            }
+            //hud
+            if (hudtoggle == true)
+            {
+                StringFormat hudstringFormat = new StringFormat();
+                hudstringFormat.Alignment = StringAlignment.Near;
+                hudstringFormat.LineAlignment = StringAlignment.Far;
+                RectangleF hudrect = new RectangleF(universe.GetLength(0), universe.GetLength(1), graphicsPanel1.ClientSize.Width, graphicsPanel1.ClientSize.Height - 40);
+                Font hudfont = new Font("Arial", 25f);
 
-                    e.Graphics.DrawString("Generations = " + generations.ToString() + "\nseed = " + seed.ToString() + "\nCell Count = " + alive.ToString() + "\nInterval = " + time.ToString(), hudfont, hudbrush, hudrect, hudstringFormat);
-                }
+                e.Graphics.DrawString("Generations = " + generations.ToString() + "\nseed = " + seed.ToString() + "\nCell Count = " + alive.ToString() + "\nInterval = " + time.ToString(), hudfont, hudbrush, hudrect, hudstringFormat);
             }
             // Cleaning up pens and brushes
             gridPen.Dispose();
@@ -833,7 +834,5 @@ namespace My_GOL
             coloumn = Properties.Settings.Default.Coloumns;
             graphicsPanel1.Invalidate();
         }
-
-
     }
 }
