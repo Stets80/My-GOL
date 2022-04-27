@@ -25,7 +25,6 @@ C:\Users\stets\Source\Repos\My-GOL\My GOL\obj\Debug\My GOL.pdb
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\bin\Debug\My GOL.exe.config
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\bin\Debug\My GOL.exe
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\bin\Debug\My GOL.pdb
-C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.csproj.AssemblyReference.cache
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My_GOL.Form1.resources
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My_GOL.SeedDialog.resources
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My_GOL.Properties.Resources.resources
@@ -34,3 +33,4 @@ C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my 
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.exe
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.pdb
 C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My_GOL.options.resources
+C:\Users\stets\OneDrive\Desktop\fullsail\5. Computer Science project\my work\my GOL\Git My GOL\My GOL\obj\Debug\My GOL.csproj.AssemblyReference.cache
