@@ -13,7 +13,6 @@ namespace My_GOL
 {
     public partial class Form1 : Form
     {
-
         // The universe array
         bool[,] universe = new bool[Properties.Settings.Default.Rows, Properties.Settings.Default.Coloumns];
         bool[,] scratchPad = new bool[Properties.Settings.Default.Rows, Properties.Settings.Default.Coloumns];
@@ -163,7 +162,7 @@ namespace My_GOL
                     }
 
                     // paint numbers in cells
-                    Font font = new Font("Arial", 10f);
+                    Font font = new Font("Arial", 10F);
 
                     StringFormat stringFormat = new StringFormat();
                     stringFormat.Alignment = StringAlignment.Center;
